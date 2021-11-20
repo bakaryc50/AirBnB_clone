@@ -1,0 +1,12 @@
+~*~
+*~
+~*
+#*#
+*.json
+*.pyc
+*.txt
+*.org
+*.out
+TAGS
+tags
+__pycache__
