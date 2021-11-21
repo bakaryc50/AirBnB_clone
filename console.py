@@ -19,7 +19,15 @@ class HBNBCommand(cmd.Cmd):
     else:
         promt = ""
 
-    all_classes = {"BaseModel", "User"}
+    all_classes = {
+            "BaseModel",
+            "User",
+            "Place",
+            "State",
+            "City",
+            "Review",
+            "Amenity"
+            }
 
     def do_quit(self, line):
         """ Quit the command and exits the program
