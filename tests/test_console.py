@@ -11,6 +11,7 @@ import console
 from console import HBNBCommand
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class TestHBNBCommand(unittest.TestCase):
@@ -96,6 +97,3 @@ class TestHBNBCommand(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as f:
             self.consol.onecmd("all MyModel")
             self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
-        with patch("sys.stdout", new=StringIO()) as f:
-            self.consol.onecmd("all BaseModel")
-            self.assertEqual(f.getvalue(), "[]\n")

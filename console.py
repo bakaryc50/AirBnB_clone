@@ -5,6 +5,8 @@ import sys
 
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
+
 from shlex import split
 
 
@@ -17,7 +19,7 @@ class HBNBCommand(cmd.Cmd):
     else:
         promt = ""
 
-    all_classes = {"BaseModel"}
+    all_classes = {"BaseModel", "User"}
 
     def do_quit(self, line):
         """ Quit the command and exits the program
