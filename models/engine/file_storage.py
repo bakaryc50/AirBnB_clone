@@ -14,10 +14,16 @@ class FileStorage:
     __file_path = "file.json"
     __objects = dict()
 
-    def all(self):
+    def all(self, cls=None):
         """ returns the dictionary __objects
         """
-        return self.__objects
+        if cls is None:
+            return self.__objects.copy()
+        else:
+            return {
+                    key: obj for key, obj in self.__objects.items()
+                    if type(obj) is cls
+                    }
 
     def new(self, obj):
         """ register new object
@@ -34,6 +40,14 @@ class FileStorage:
         new_dict = {key: obj.to_dict() for key, obj in self.__objects.items()}
         with open(self.__file_path, "w", encoding="UTF-8") as f:
             json.dump(new_dict, f)
+
+    def delete(self, obj=None):
+        """delete obj from __objects
+        """
+        if isinstance(obj, BaseModel):
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            if key in self.__objects:
+                del self.__objects[key]
 
     def reload(self):
         """ load the object from json file

@@ -14,7 +14,7 @@ class BaseModel:
         if kwargs:
             for key in kwargs:
                 if key in ["created_at", "updated_at"]:
-                    setattr(self, key, datetime.isoformat(kwargs[key]))
+                    setattr(self, key, datetime.fromisoformat(kwargs[key]))
                 elif key != "__class__":
                     setattr(self, key, kwargs[key])
         else:
@@ -34,7 +34,13 @@ class BaseModel:
         """ save the current instance by updating updated_at
         """
         self.updated_at = datetime.now()
+        models.storage.new(self)
         models.storage.save()
+
+    def delete(self):
+        """deletes the current instance from the storage
+        """
+        models.storage.delete(self)
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values of __dict__ of the instance

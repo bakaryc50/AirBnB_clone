@@ -67,3 +67,35 @@ class TestHBNBCommand(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as f:
             self.consol.onecmd("create MyModel")
             self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
+
+    def test_show(self):
+        """ tests the show command
+        """
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.consol.onecmd("show")
+            self.assertEqual(f.getvalue(), "** class name missing **\n")
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.consol.onecmd("show MyModel")
+            self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
+
+    def test_destroy(self):
+        """Test destroy command inpout"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("destroy")
+            self.assertEqual(
+                "** class name missing **\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("destroy MyModel")
+            self.assertEqual(
+                "** class doesn't exist **\n", f.getvalue())
+
+    def test_all(self):
+        """ tests the print of all string representation of
+        an instance
+        """
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.consol.onecmd("all MyModel")
+            self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.consol.onecmd("all BaseModel")
+            self.assertEqual(f.getvalue(), "[]\n")
