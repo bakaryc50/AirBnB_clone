@@ -57,3 +57,13 @@ class TestHBNBCommand(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as f:
             self.consol.onecmd("quit")
             self.assertEqual(f.getvalue(), "")
+
+    def test_create(self):
+        """ tests the create command
+        """
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.consol.onecmd("create")
+            self.assertEqual(f.getvalue(), "** class name missing **\n")
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.consol.onecmd("create MyModel")
+            self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
