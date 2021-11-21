@@ -23,7 +23,7 @@ class TestFileStorage(unittest.TestCase):
     def test_new(self):
         """ tests when new is created
         """
-        storage = FileSotrage()
+        storage = FileStorage()
         obj = storage.all()
         my_model = BaseModel()
         storage.new(my_model)
